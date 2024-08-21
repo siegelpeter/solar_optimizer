@@ -116,6 +116,8 @@ class SolarOptimizerCoordinator(DataUpdateCoordinator):
             _LOGGER.warning(
                 "Power production is not valued. Solar Optimizer will be disabled"
             )
+            for _, device in enumerate(self._devices):
+                await device.deactivate()
             return None
 
         if not self._smooth_production:
